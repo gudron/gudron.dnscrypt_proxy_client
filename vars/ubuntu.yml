@@ -1,0 +1,3 @@
+---
+dnscrypt_proxy_package_name: dnscrypt-proxy
+dnscrypt_proxy_apt_key_id: EEE1EE950DF627C6879627B56C46343FA0B41DB7

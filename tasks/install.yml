@@ -1,0 +1,7 @@
+---
+- name: Install Dnscrypt-proxy client
+  package:
+    name: "{{ dnscrypt_proxy_package_name }}"
+    state: present
+  # notify:
+  #   - "os:dnscrypt_proxy_client:installed"

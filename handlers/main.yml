@@ -1,0 +1,16 @@
+---
+- name: Restart dnscrypt-proxy client service
+  service:
+    name: dnscrypt-proxy
+    state: restarted
+  listen: "os:dnscrypt_proxy_client_configfile:changed"
+  # notify:
+  #   - "os:dnscrypt_proxy_client:restarted"
+
+- name: Handler of resolv_conf changed
+  command: /bin/true
+  listen: "os:resolv_conf:changed"
+
+- name: Handler of hosts file changed
+  command: /bin/true
+  listen: "os:hosts_file:changed"

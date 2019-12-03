@@ -1,0 +1,16 @@
+---
+- name: Set main release name
+  set_fact:
+    release_name: "{{ ansible_distribution_release }}"
+
+- name: Add Dnscrypt-proxy repository key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: "{{ dnscrypt_proxy_apt_key_id }}"
+    state: present
+
+- name: Add Dnscrypt-proxy repository
+  apt_repository:
+    repo: "deb http://ppa.launchpad.net/shevchuk/dnscrypt-proxy/ubuntu {{ release_name }} main"
+    state: present
+    update_cache: yes

@@ -1,0 +1,6 @@
+{{ ansible_managed | comment }}
+
+{% for listen_address in listen_loopback_addresses + listen_addresses %}
+nameserver {{ listen_address.ip }}
+{% endfor %}
+options edns0 single-request-reopen

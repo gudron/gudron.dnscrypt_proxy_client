@@ -1,0 +1,14 @@
+---
+- name: Inlcude ubuntu add repository task
+  include_tasks: add_repository/add_repository_ubuntu.yaml
+  when: 
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version is version('16.04', '>=')
+    - ansible_distribution_version is version('18.10', '<')
+
+- name: Inlcude debian add repository task
+  include_tasks: add_repository/add_repository_debian.yaml
+  when: 
+    - ansible_distribution == 'Debian'
+    - ansible_distribution_version is version('8.0', '>=')
+    - ansible_distribution_version is version('9.0', '<=')

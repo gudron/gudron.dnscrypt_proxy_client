@@ -1,0 +1,32 @@
+---
+- name: Prepare Dnscrypt-proxy config file
+  template:
+    src: templates/etc/dnscrypt-proxy/dnscrypt-proxy.toml.j2
+    dest: /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+  notify:
+    - "os:dnscrypt_proxy_client_configfile:changed"
+
+- name: Prepare resolv.conf
+  template:
+    src: templates/etc/resolv.conf.j2
+    dest: /etc/resolv.conf
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+  notify:
+    - "os:resolv_conf:changed"
+
+- name: Prepare hosts file
+  blockinfile:
+    path: /etc/hosts
+    insertafter: '127.0.0.1	localhost'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK. {{ role_name }}"
+    content:  |
+      {% for listen_address in listen_loopback_addresses %}
+      {{ listen_address.ip }} localhost
+      {% endfor %}
+  notify:
+    - "os:hosts_file:changed"

@@ -1,0 +1,14 @@
+- name: Prepare apt pinning
+  template:
+    src: ./templates/etc/apt/preferences.d/pinning.pref.j2
+    dest: /etc/apt/preferences.d/pinning.pref
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+  register: dnscrypt_apt_pinning
+
+- name: Add Dnscrypt-proxy repository
+  apt_repository:
+    repo: "deb deb https://deb.debian.org/debian/ testing main"
+    state: present
+    update_cache: yes

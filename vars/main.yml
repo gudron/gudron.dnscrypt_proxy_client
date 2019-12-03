@@ -1,0 +1,6 @@
+---
+listen_addresses_prepared: >
+  [{% for item in listen_loopback_addresses + listen_addresses -%}
+    u"{{ item.ip }}:{{ item.port }}"
+    {{ '' if loop.last else ',' }}
+  {%- endfor %}]

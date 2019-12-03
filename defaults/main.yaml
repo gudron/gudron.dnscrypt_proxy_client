@@ -1,0 +1,20 @@
+---
+fallback_resolver:
+  ip: 9.9.9.9
+  port: 53
+
+listen_loopback_addresses:
+  - ip: 127.0.0.1
+    port: 53
+
+listen_addresses: []
+
+forwarding:
+  rules_file_path: '/opt/etc/dnscypt-proxy/forwarding-rules.txt'
+  rules: []
+    # - name: example.com
+    #   dns_server: 8.8.8.8
+
+public_servers:
+  - dnscrypt.nl-ns0
+  - d0wn-nl-ns4
